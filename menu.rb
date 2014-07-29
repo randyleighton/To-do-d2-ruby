@@ -1,40 +1,65 @@
 require './lib/task.rb'
-# require './lib/list.rb'
+require './lib/list.rb'
 
-@list = []
+@lists = []
+@current_list = nil
 
 def main_menu
+  loop do
+    #list menu
+    puts "[c] create new list"
+    puts "[d] display lists"
+    puts "press 'x' to exit"
+    menu_choice = gets.chomp
+    if menu_choice == 'c'
+      create_list
+    elsif menu_choice == 'x'
+      puts "bye"
+      exit
+    else
+      puts "sorry not a valid entry"
+    end
+  end
+end
+
+def create_list
+  puts "Enter a new list: "
+  inputted_list = gets.chomp
+  @current_list = List.new(inputted_list)
+  @lists << @current_list
+  task_menu
+end
+
+def task_menu
   loop do
     puts "press 'a' to add a task"
     puts "press 'l' to list tasks"
     puts "press 'm' to mark task complete and delete"
     puts "press 'x' to exit"
     menu_choice = gets.chomp
-      if menu_choice == 'a'
-        add_task
-      elsif menu_choice == 'l'
-        list_tasks
-      elsif menu_choice == 'm'
-        mark_tasks
-      elsif menu_choice == 'x'
-        puts "bye"
-        exit
-      else
-        puts "sorry not a valid entry"
-      end
-   end
+    if menu_choice == 'a'
+      add_task
+    elsif menu_choice == 'l'
+      list_tasks
+    elsif menu_choice == 'x'
+      puts "bye"
+      exit
+    else
+      puts "sorry not a valid entry"
+    end
+  end
 end
 
 def add_task
   puts"Enter task here:"
   user_description = gets.chomp
-  @list << Task.new(user_description)
+  @current_list.add_task(Task.new(user_description))
   puts "task added.\n\n"
 end
 
 def list_tasks
   puts "Here are your tasks:"
-  @list.each do |task|
+  @current_list.tasks.each do |task|
     puts task.description
   end
   puts "\n"
@@ -47,7 +72,7 @@ def mark_tasks
   end
   puts "\n"
   task_choice = gets.chomp.to_i
+  #this has to change
   @list.delete_at(task_choice)
 end
-
 main_menu
