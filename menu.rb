@@ -7,12 +7,15 @@ def main_menu
   loop do
     puts "press 'a' to add a task"
     puts "press 'l' to list tasks"
+    puts "press 'm' to mark task complete and delete"
     puts "press 'x' to exit"
     menu_choice = gets.chomp
       if menu_choice == 'a'
         add_task
-       elsif menu_choice == 'l'
+      elsif menu_choice == 'l'
         list_tasks
+      elsif menu_choice == 'm'
+        mark_tasks
       elsif menu_choice == 'x'
         puts "bye"
         exit
@@ -35,6 +38,16 @@ def list_tasks
     puts task.description
   end
   puts "\n"
+end
+
+def mark_tasks
+  puts "Choose task number to mark complete and remove"
+  @list.each_with_index do |task,index|
+    puts index.to_s + " " + task.description
+  end
+  puts "\n"
+  task_choice = gets.chomp.to_i
+  @list.delete_at(task_choice)
 end
 
 main_menu
