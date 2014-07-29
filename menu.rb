@@ -6,13 +6,15 @@ require './lib/list.rb'
 
 def main_menu
   loop do
-    #list menu
+    puts "<== Main Menu ==>"
     puts "[c] create new list"
     puts "[d] display lists"
     puts "press 'x' to exit"
     menu_choice = gets.chomp
     if menu_choice == 'c'
       create_list
+    elsif menu_choice == 'd'
+      display_lists
     elsif menu_choice == 'x'
       puts "bye"
       exit
@@ -30,20 +32,27 @@ def create_list
   task_menu
 end
 
+def display_lists
+  @lists.each_with_index do |list,index|
+    puts list.name
+  end
+  main_menu
+end
+
 def task_menu
   loop do
     puts "press 'a' to add a task"
     puts "press 'l' to list tasks"
-    puts "press 'm' to mark task complete and delete"
-    puts "press 'x' to exit"
+    #puts "press 'm' to mark task complete and delete"
+    puts "press 'x' to exit to main menu"
     menu_choice = gets.chomp
     if menu_choice == 'a'
       add_task
     elsif menu_choice == 'l'
       list_tasks
     elsif menu_choice == 'x'
-      puts "bye"
-      exit
+      puts "\n\n"
+      main_menu
     else
       puts "sorry not a valid entry"
     end

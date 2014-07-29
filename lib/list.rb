@@ -15,4 +15,8 @@ class List
 
   end
 
+  def name
+    @list
+  end
+
 end
