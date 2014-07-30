@@ -27,4 +27,20 @@ describe Task do
     test_task = Task.new('wash the car')
     expect(test_task.description).to eq 'wash the car'
   end
+  it "can mark tasks complete" do
+    test_list = List.new("School stuff")
+    test_task = Task.new("Learn Ruby")
+    test_list.add_task(test_task)
+    test_list.tasks[0].set_status("Complete")
+    expect(test_list.tasks[0].status).to eq "Complete"
+  end
+  # it "can delete a task" do
+  #   test_list = List.new("School stuff")
+  #   test_task = Task.new("Learn Ruby")
+  #   another_test_task = Task.new("Learn Go")
+  #   test_list.add_task(test_task)
+  #   test_list.add_task(another_test_task)
+  #   test_list.tasks[0].remove
+  #   expect(test_list.tasks).to eq [another_test_task]
+  # end
 end
