@@ -24,7 +24,7 @@ describe List do
     another_test_task.set_priority(5)
     test_list.add_task(test_task)
     test_list.add_task(another_test_task)
-    expect(test_list.tasks_by('priority')).to eq [another_test_task, test_task]
+    expect(test_list.tasks_by('p')).to eq [another_test_task, test_task]
   end
 
   it "can sort tasks by name" do
@@ -33,8 +33,7 @@ describe List do
     another_test_task = Task.new("Learn Python")
     test_list.add_task(test_task)
     test_list.add_task(another_test_task)
-    test_list.tasks_by("name")
-    expect(test_list.tasks_by('name')).to eq [another_test_task, test_task]
+    expect(test_list.tasks_by('n')).to eq [another_test_task, test_task]
   end
 
   it "can sort tasks by date" do
@@ -45,8 +44,7 @@ describe List do
     test_list.add_task(another_test_task)
     test_task.set_date("07/14/14")
     another_test_task.set_date("07/15/15")
-    test_list.tasks_by("date")
-    expect(test_list.tasks_by("date")).to eq [test_task, another_test_task]
+    expect(test_list.tasks_by("d")).to eq [test_task, another_test_task]
   end
 end
 
