@@ -15,6 +15,39 @@ describe List do
     test_list.add_task(test_task)
     expect(test_list.tasks).to eq [test_task]
   end
+
+  it "can sort tasks by priority" do
+    test_list = List.new("School stuff")
+    test_task = Task.new("Learn Ruby")
+    another_test_task = Task.new("Learn Python")
+    test_task.set_priority(2)
+    another_test_task.set_priority(5)
+    test_list.add_task(test_task)
+    test_list.add_task(another_test_task)
+    expect(test_list.tasks_by('priority')).to eq [another_test_task, test_task]
+  end
+
+  it "can sort tasks by name" do
+    test_list = List.new("School stuff")
+    test_task = Task.new("Learn Ruby")
+    another_test_task = Task.new("Learn Python")
+    test_list.add_task(test_task)
+    test_list.add_task(another_test_task)
+    test_list.tasks_by("name")
+    expect(test_list.tasks_by('name')).to eq [another_test_task, test_task]
+  end
+
+  it "can sort tasks by date" do
+    test_list = List.new("School stuff")
+    test_task = Task.new("Learn Ruby")
+    another_test_task = Task.new("Learn Python")
+    test_list.add_task(test_task)
+    test_list.add_task(another_test_task)
+    test_task.set_date("07/14/14")
+    another_test_task.set_date("07/15/15")
+    test_list.tasks_by("date")
+    expect(test_list.tasks_by("date")).to eq [test_task, another_test_task]
+  end
 end
 
 describe Task do
@@ -43,4 +76,6 @@ describe Task do
   #   test_list.tasks[0].remove
   #   expect(test_list.tasks).to eq [another_test_task]
   # end
+
+
 end

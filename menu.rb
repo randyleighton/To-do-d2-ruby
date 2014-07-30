@@ -51,6 +51,7 @@ def task_menu
     puts "[l] list tasks"
     puts "[m] mark task complete"
     puts "[d] delete a task"
+    puts "[s] sort all tasks"
     puts "[x] exit to main menu"
     menu_choice = gets.chomp
     if menu_choice == 'a'
@@ -61,6 +62,8 @@ def task_menu
       mark_task
     elsif menu_choice == 'd'
       delete_task
+    elsif menu_choice == 's'
+      sort_tasks
     elsif menu_choice == 'x'
       puts "\n\n"
       main_menu
@@ -107,6 +110,9 @@ def mark_task
   task_choice = gets.chomp.to_i
   @current_list.tasks[task_choice].set_status("Complete")
   puts "#{@current_list.tasks[task_choice].description} is now marked Complete\n"
+  puts "\nHere are your current tasks:"
+  list_with_index
+
 end
 
 def delete_task
@@ -117,4 +123,16 @@ def delete_task
   puts "\nHere are your current tasks:"
   list_with_index
 end
+
+def sort_tasks
+  puts "How do you want to sort?"
+  puts "[p] priority [d] date [n] task name"
+  task_choice = gets.chomp
+  puts "Sorting the objects!\n"
+  @current_list.tasks_by(task_choice)
+  puts "\nSorted list:"
+  list_with_index
+end
+
+
 main_menu
